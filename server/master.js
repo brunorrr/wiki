@@ -199,11 +199,16 @@ module.exports = async () => {
   // Start HTTP Server(s)
   // ----------------------------------------
 
-  await WIKI.servers.startHTTP()
+  /*
+    Disabled to bypass jwt authentication error
+    See: https://github.com/requarks/wiki/issues/1822#issuecomment-2365196530
+   */
 
-  if (WIKI.config.ssl.enabled === true || WIKI.config.ssl.enabled === 'true' || WIKI.config.ssl.enabled === 1 || WIKI.config.ssl.enabled === '1') {
-    await WIKI.servers.startHTTPS()
-  }
+  // await WIKI.servers.startHTTP()
+  //
+  // if (WIKI.config.ssl.enabled === true || WIKI.config.ssl.enabled === 'true' || WIKI.config.ssl.enabled === 1 || WIKI.config.ssl.enabled === '1') {
+  //   await WIKI.servers.startHTTPS()
+  // }
 
   return true
 }

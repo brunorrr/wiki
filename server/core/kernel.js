@@ -58,7 +58,13 @@ module.exports = {
       } else {
         await this.preBootMaster()
         await require('../master')()
-        this.postBootMaster()
+        await this.postBootMaster()
+
+        await WIKI.servers.startHTTP()
+
+        if (WIKI.config.ssl.enabled === true || WIKI.config.ssl.enabled === 'true' || WIKI.config.ssl.enabled === 1 || WIKI.config.ssl.enabled === '1') {
+          await WIKI.servers.startHTTPS()
+        }
       }
     } catch (err) {
       WIKI.logger.error(err)
